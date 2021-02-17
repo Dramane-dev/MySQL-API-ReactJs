@@ -1,6 +1,6 @@
 # CRUD APP MYSQL IN REACTJS 👋 ⚛️
 
-Mini CRUD APP avec MYSQL 📜
+Mini CRUD APP ReactJs
 
 ![alt text](https://github.com/Dramane-dev/MySQL-API-ReactJs/blob/main/architecture.jpg?raw=true)
 
