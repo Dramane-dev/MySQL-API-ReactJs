@@ -28,7 +28,7 @@ L'application est Composé d'un dossier :
 
 ## Installation
 
-Pour pouvoir lancer le projet il vous faut le back construit en NodeJs voici le lien : back-end-NodeJs(https://github.com/Dramane-dev/NodeJs-Practices-MySQL)
+Pour pouvoir lancer le projet il vous faut le back construit en NodeJs voici le lien : [back-end-NodeJs](https://github.com/Dramane-dev/NodeJs-Practices-MySQL)
 Puis executer la commande suivante dans votre terminal en veillant à vous situer dans le bon chemin 😉 :
 
 ```bash
