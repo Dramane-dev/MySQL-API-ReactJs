@@ -1,5 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
+// Import components
+import EditTask from './EditTask';
 
 // Imports styles 
 import '../styles/taskList.css';
@@ -20,6 +24,7 @@ class TaskList extends React.Component {
         url: 'http://localhost:3030/tasks',
         urlToDelete: 'localhost:3030/task/',
         id: '',
+        redirect: null,
         tasks: []
     }
 
@@ -27,6 +32,7 @@ class TaskList extends React.Component {
     async componentDidMount() {
         try {
             const res = await Axios.get(this.state.url)
+            //console.log(res.data.result.filter(i => i.id == '8'))
             this.setState({ tasks: res.data.result })
         } catch (err){
             console.log(err);
@@ -43,7 +49,9 @@ class TaskList extends React.Component {
                     <td>{nom}</td>
                     <td>{date}</td>
                     <td>
-                        <button><FontAwesomeIcon icon={ faPen } pulse /></button>
+                        <button onClick={() => {
+                            this.updateTask(id);
+                        }}><FontAwesomeIcon icon={ faPen } pulse /></button>
                         <button onClick={() => {
                             this.deleteTask(task.id);
                         }}><FontAwesomeIcon icon={ faTrash } pulse/></button>
@@ -78,12 +86,22 @@ class TaskList extends React.Component {
              .catch(err => console.log(err.message));
         }
     }
+
+    // Update Task
+    updateTask = id => {
+        console.log(id);
+        return this.setState({ redirect: true, id: id });
+    }
+
     // Refresh page 
     refreshPage = () => {
         window.location.reload(false);
     }
 
     render() {
+        if (this.state.redirect) {
+            return ( <EditTask name={this.state.id } /> )
+        }
         return (
             <>
                 <table className="table tasks" style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
