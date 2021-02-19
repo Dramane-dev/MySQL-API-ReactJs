@@ -100,7 +100,7 @@ class TaskList extends React.Component {
 
     render() {
         if (this.state.redirect) {
-            return ( <EditTask name={this.state.id } /> )
+            return ( <EditTask tasks={this.state.tasks } id={this.state.id} /> )
         }
         return (
             <>

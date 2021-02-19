@@ -19,18 +19,41 @@ const api = Axios.create({
 class EditTask extends React.Component {
     state = {
         redirect: null,
+        task: [],
         id: '',
         nom: '',
         date: ''
     }
-    componentDidMount() {
+    async componentDidMount() {
         try {
-            const id = this.props.name;
-            console.log(this.props.name)
-            this.setState({ id: id });
+            const id = this.props.id;
+/*             console.log(this.props.name.map(task => {
+                const { id, nom, date } = task;
+                console.log(id)
+                console.log(nom)
+                console.log(date)
+            })); */
+            //console.log(this.props.tasks.map(task => console.log(task)))
+
+            const result = await this.props.tasks.filter(taskId => taskId.id == id);
+            console.log(result);
+            this.setState({ id: id, task: result });
         } catch (error) {
             console.log(error.message)
         }
+
+        console.log(this.state.task.length)
+        this.getData(this.state.task);
+    }
+
+    // Get Object data of Task filtered and assign a value in my state
+    getData = async tasks => {
+        await tasks.map(task => {
+            const { nom, date } = task;
+            this.setState({ nom: nom, date: date });
+        })
+        console.log(this.state.nom)
+        console.log(this.state.date)
     }
 
     handleChangeNom = event => {
@@ -66,12 +89,13 @@ class EditTask extends React.Component {
                 <br/>
                 <Form onSubmit={ this.handleSubmit }>
                     <div className="col-auto mb-3">
-                        <label className="form-label">Nom de la tâche</label>
-                        <input type="text" className="form-control" name="nom" onChange={ this.handleChangeNom } placeholder={ this.state.id } />
+                        <label className="form-label">Nom de la tâche </label> &nbsp;
+                        <label><strong>ID : </strong> { this.state.id }</label>
+                        <input type="text" className="form-control" name="nom" onChange={ this.handleChangeNom } placeholder={ this.state.nom } />
                     </div>
                     <div className="col-auto mb-3">
                         <label className="form-label">Date</label>
-                        <input type="date" className="form-control" name="date" onChange={ this.handleChangeDate } placeholder="Date de fin de votre tâche" />
+                        <input type="date" className="form-control" name="date" onChange={ this.handleChangeDate } placeholder={ this.state.date } />
                     </div>
                     <div className="col-auto">
                         <button type="submit" className="btn btn-light mb-3">Créer</button>
