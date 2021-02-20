@@ -25,7 +25,7 @@ class App extends React.Component {
       <Switch>
         <Route path='/' component={ Home } exact />
         <Route path='/Task' component={ NewTask } />
-        <Route path='/Task/:id' component={ EditTask } />
+        <Route path='/editTask/:id' component={ EditTask } />
         {/* <Route path='/Register' component={ Home } /> */}
         <Route component={Error} />
       </Switch>

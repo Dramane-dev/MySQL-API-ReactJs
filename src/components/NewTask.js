@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Form = styled.form`
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 10%;
+    margin-top: 7%;
 `;
 
 
@@ -51,8 +51,9 @@ class NewTask extends React.Component {
         }
         return (
              <>
-                <h1>Create a new task</h1>
                 <br/>
+                <br/>
+                <h1>Create a new task</h1>
                 <Form onSubmit={ this.handleSubmit }>
                     <div className="col-auto mb-3">
                         <label className="form-label">Nom de la tâche</label>

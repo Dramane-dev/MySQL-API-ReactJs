@@ -1,6 +1,5 @@
 import React from 'react';
 import Axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 // Import components
 import EditTask from './EditTask';
@@ -8,7 +7,6 @@ import EditTask from './EditTask';
 // Imports styles 
 import '../styles/taskList.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styled from 'styled-components';
 
 // Import fontawesome 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -104,6 +102,11 @@ class TaskList extends React.Component {
         }
         return (
             <>
+                <br />
+                <h1>My Tasks Today 😊</h1>
+                <br />
+                <br />
+                <br />
                 <table className="table tasks" style={{width: '80%', marginLeft: 'auto', marginRight: 'auto'}}>
                     <tbody>
                         <tr>{this.headerTable()}<th>Update or Delete</th></tr>

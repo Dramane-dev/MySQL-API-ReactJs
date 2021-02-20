@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Form = styled.form`
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 10%;
+    margin-top: 7%;
 `;
 
 // API TASK 
@@ -24,19 +24,12 @@ class EditTask extends React.Component {
         nom: '',
         date: ''
     }
+
     async componentDidMount() {
         try {
             const id = this.props.id;
-/*             console.log(this.props.name.map(task => {
-                const { id, nom, date } = task;
-                console.log(id)
-                console.log(nom)
-                console.log(date)
-            })); */
-            //console.log(this.props.tasks.map(task => console.log(task)))
-
             const result = await this.props.tasks.filter(taskId => taskId.id == id);
-            console.log(result);
+            // console.log(result);
             this.setState({ id: id, task: result });
         } catch (error) {
             console.log(error.message)
@@ -52,8 +45,8 @@ class EditTask extends React.Component {
             const { nom, date } = task;
             this.setState({ nom: nom, date: date });
         })
-        console.log(this.state.nom)
-        console.log(this.state.date)
+        // console.log(this.state.nom)
+        // console.log(this.state.date)
     }
 
     handleChangeNom = event => {
@@ -68,34 +61,41 @@ class EditTask extends React.Component {
         event.preventDefault();
 
         const nom = this.state.nom, date = this.state.date;
-        const id = 'this.props;';
-        console.log(`${ this.state.urlToDelete }${ id }`);
-        api.put(`${ id }`, { nom, date })
+        // console.log(`${ this.state.urlToDelete }${ id }`);
+        api.put(`${this.state.id }`, { nom, date })
          .then(res => {
              console.log(res.data);
+             this.refreshPage(); 
              this.setState({ redirect: '/' });
          })
          .catch(err => console.log(err));
     }
 
+    // Refresh page 
+    refreshPage = () => {
+        window.location.reload(false);
+    }
+
     render() {
+        // Pour le moment la redirection est gérée par la méthode refreshPage()
         if (this.state.redirect) {
             console.log(this.state.redirect);
             return <Redirect to={ this.state.redirect } />
         }
         return (
              <>
-                <h1>Edit a task</h1>
                 <br/>
+                <br/>
+                <h1>Edit a task</h1>
                 <Form onSubmit={ this.handleSubmit }>
                     <div className="col-auto mb-3">
                         <label className="form-label">Nom de la tâche </label> &nbsp;
                         <label><strong>ID : </strong> { this.state.id }</label>
-                        <input type="text" className="form-control" name="nom" onChange={ this.handleChangeNom } placeholder={ this.state.nom } />
+                        <input type="text" className="form-control" name="nom" onChange={ this.handleChangeNom } value={ this.state.nom }/>
                     </div>
                     <div className="col-auto mb-3">
                         <label className="form-label">Date</label>
-                        <input type="date" className="form-control" name="date" onChange={ this.handleChangeDate } placeholder={ this.state.date } />
+                        <input type="date" className="form-control" name="date" onChange={ this.handleChangeDate } value={ this.state.date } />
                     </div>
                     <div className="col-auto">
                         <button type="submit" className="btn btn-light mb-3">Créer</button>

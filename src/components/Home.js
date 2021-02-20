@@ -13,11 +13,6 @@ class Home extends React.Component {
         return (
             <>
                 <div className="App">
-                    <br />
-                    <h1>My Tasks Today 😊</h1>
-                    <br />
-                    <br />
-                    <br />
                     <TaskList />
                 </div>
             </>
